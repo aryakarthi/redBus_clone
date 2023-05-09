@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
-  Box, 
+  Box,
   Button,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -26,7 +26,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 import { useSelector, useDispatch } from "react-redux";
-// import { addProduct } from "../../components/redux/stateSlice";
+import { addBus } from "../../components/redux/stateSlice";
 
 const AddBus = () => {
   const {
@@ -158,6 +158,8 @@ const AddBus = () => {
       LowerPrice: data.lowerPrice,
     };
     console.log(busData);
+    dispatch(addBus(busData));
+    console.log("add bus state", state);
   };
   console.log(errors);
 

@@ -7,7 +7,8 @@ const stateSlice = createSlice({
     isAdminSignedIn:
       JSON.parse(localStorage.getItem("isAdminSignedIn")) || false,
     logData: JSON.parse(localStorage.getItem("logData")) || {},
-    // watches: JSON.parse(localStorage.getItem("allWatches")) || [],
+    allBusData: [],
+    // allBusData: JSON.parse(localStorage.getItem("allBuses")) || [],
     // cart: [],
     // wishlist: [],
   },
@@ -21,8 +22,12 @@ const stateSlice = createSlice({
     logDetails: (state, action) => {
       state.logData = action.payload;
     },
+    addBus: (state, action) => {
+      state.allBusData.push(action.payload);
+    },
   },
 });
 
-export const { signInUser, signInAdmin, logDetails } = stateSlice.actions;
+export const { signInUser, signInAdmin, logDetails, addBus } =
+  stateSlice.actions;
 export default stateSlice.reducer;
