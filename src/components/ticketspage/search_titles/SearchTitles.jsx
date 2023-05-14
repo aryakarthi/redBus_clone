@@ -2,52 +2,53 @@ import React from "react";
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import "./SearchTitles.scss";
 
-const SearchTitles = () => {
+const SearchTitles = (data) => {
+  console.log(data);
   return (
     <>
       <Stack className="search-titles">
         <Grid container>
           <Grid item lg={2}>
             <Stack>
-              <Typography>12 buses found</Typography>
+              <Typography className="bold-title">{data.buscount} buses found</Typography>
             </Stack>
           </Grid>
 
           <Grid item lg={1}>
             <Stack>
-              <Typography>SORT BY:</Typography>
+              <Typography className="bold-title">SORT BY:</Typography>
             </Stack>
           </Grid>
           <Grid item lg={2}>
             <Stack>
-              <Typography>Departure</Typography>
+              <Typography className="thin-title">Departure</Typography>
             </Stack>
           </Grid>
           <Grid item lg={1}>
             <Stack>
-              <Typography>Duration</Typography>
+              <Typography className="thin-title">Duration</Typography>
             </Stack>
           </Grid>
 
           <Grid item lg={2}>
             <Stack>
-              <Typography>Arrival</Typography>
+              <Typography className="thin-title">Arrival</Typography>
             </Stack>
           </Grid>
           <Grid item lg={1}>
             <Stack>
-              <Typography>Ratings</Typography>
+              <Typography className="thin-title">Ratings</Typography>
             </Stack>
           </Grid>
           <Grid item lg={1}>
             <Stack>
-              <Typography>Fare</Typography>
+              <Typography className="thin-title">Fare</Typography>
             </Stack>
           </Grid>
 
           <Grid item lg={2}>
             <Stack>
-              <Typography>Seats Available</Typography>
+              <Typography className="thin-title">Seats Available</Typography>
             </Stack>
           </Grid>
         </Grid>

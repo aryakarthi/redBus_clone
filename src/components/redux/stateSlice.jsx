@@ -7,8 +7,7 @@ const stateSlice = createSlice({
     isAdminSignedIn:
       JSON.parse(localStorage.getItem("isAdminSignedIn")) || false,
     logData: JSON.parse(localStorage.getItem("logData")) || {},
-    allBusData: [],
-    // allBusData: JSON.parse(localStorage.getItem("allBuses")) || [],
+    allBusData: JSON.parse(localStorage.getItem("allBuses")) || [],
     // cart: [],
     // wishlist: [],
   },

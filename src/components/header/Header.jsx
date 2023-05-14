@@ -74,7 +74,7 @@ const Header = () => {
                 />
               </Link>
               <Stack direction={"row"} spacing={3} className="nav-left">
-                <Link to={`/bus_tickets`} className="links">
+                <Link className="links" to={`/bus_tickets`}>
                   Bus Tickets
                 </Link>
                 <Link to={`/`} className="links">

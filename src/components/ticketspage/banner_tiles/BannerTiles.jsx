@@ -6,6 +6,7 @@ import primoImg from "../../../assets/images/PRIMO.png";
 import flexiImg from "../../../assets/images/FLEXITICKET.png";
 import topImg from "../../../assets/images/TOP_RATED.png";
 import returnImg from "../../../assets/images/RETURN_TRIP.png";
+import trailImg from "../../../assets/images/TRAIL_OFFERS.png"
 
 import { RiShieldStarLine } from "react-icons/ri";
 
@@ -44,6 +45,14 @@ const BannerTiles = () => {
               component="img"
               alt="redDeal"
               src={returnImg}
+            />
+          </li>
+          <li>
+            <Box
+              className="tiles-img"
+              component="img"
+              alt="redDeal"
+              src={trailImg}
             />
           </li>
         </ul>

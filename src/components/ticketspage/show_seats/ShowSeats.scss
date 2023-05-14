@@ -1,0 +1,103 @@
+.showseats-container {
+  background-color: #eeeded !important;
+  border: 1px solid #aaa;
+  .price-filter-area {
+    padding: 20px 0;
+    gap: 30px;
+    .price-filter {
+      gap: 20px;
+      .price-filter-box {
+        width: 60px;
+        text-align: center;
+        line-height: 1.5;
+        border: 1px solid;
+      }
+    }
+  }
+  .instruction {
+    .text {
+      width: 400px;
+      font-size: 14px;
+      text-align: center;
+      background-color: #d84e55;
+      color: #fff;
+    }
+  }
+  .seat-hint-area {
+    .seat-legend {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .seat-hint {
+      gap: 16px;
+      .hint-info {
+        gap: 6px;
+        align-items: center;
+        .hint {
+          width: 32px;
+          height: 16px;
+          border: 1px solid;
+        }
+        .available {
+          background-color: #fff;
+          border: 1px solid #a7a9ac;
+        }
+        .unavailable {
+          background-color: #CBCBCB;
+          border: 1px solid #CBCBCB;
+        }
+        .female {
+          background-color: #fff;
+          border: 1px solid #F1A9A0;
+        }
+        .male {
+          background-color: #fff;
+          border: 1px solid #4A90E2;
+        }
+      }
+    }
+  }
+
+  .seat-selector{
+    .lower-deck-area{
+      .lower-deck-box{
+        padding: 20px 10px;
+        background-color: #fff;
+        .driver-cabin{
+          padding: 10px;
+          border-right: 1px solid gray;
+          .steer-wheel{
+            transform: rotate(-90deg);
+            font-size: 20px;
+          }
+        }
+        .lower-seat-selector{
+          padding: 0 20px;
+          .low-row{
+            display: flex;
+            flex-direction: row;
+          }
+        }
+      }
+      
+    }
+    .upper-deck-area{
+      .upper-deck-box{
+        padding: 20px 10px;
+        background-color: #fff;
+        .upper-space{
+          width: 40px;
+        }
+        .upper-seat-selector{
+          padding: 0 20px;
+          .up-row{
+            display: flex;
+            flex-direction: row;
+          }
+          
+        }
+      }
+      
+    }
+  }
+}

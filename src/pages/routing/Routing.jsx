@@ -24,27 +24,6 @@ const Routing = () => {
   return (
     <div>
       <BrowserRouter>
-        {/* <Header />
-        {state?.isSignedIn ? (
-          <>
-            <Routes>
-              <Route path="/home" element={<Home />}></Route>
-              <Route path="/bus_tickets" element={<BusTickets />}></Route>
-              <Route path="/add_bus" element={<AddBus />}></Route>
-              <Route
-                path="*"
-                element={<Navigate to={`/home`}></Navigate>}
-              ></Route>
-            </Routes>
-          </>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Landing />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="*" element={<Navigate to={"/"}></Navigate>}></Route>
-          </Routes>
-        )} */}
-
         <Header />
         {isUser && isRole === "user" ? (
           <>

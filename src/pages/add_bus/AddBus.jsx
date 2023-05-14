@@ -38,6 +38,10 @@ const AddBus = () => {
   const state = useSelector(({ data }) => data);
   const dispatch = useDispatch();
 
+  const [buslist, setBuslist] = useState(
+    JSON.parse(localStorage.getItem("allBuses")) || []
+  );
+
   // const [busname, setBusName] = useState("");
   // const [travelfrom, setTravelFrom] = useState("");
   // const [travelto, setTravelTo] = useState("");
@@ -96,7 +100,14 @@ const AddBus = () => {
     arrival ? arrival.$y : null
   }`;
 
+  const depDateSearch = `${departure ? departure.$y : null}-${
+    departure ? (departure.$M + 1 < 10 ? "0" : "") + (departure.$M + 1) : null
+  }-${departure ? (departure.$D < 10 ? "0" : "") + departure.$D : null}`;
+
   console.log(depDate, arrDate);
+  console.log("depDateSearch", depDateSearch);
+
+  // departure ? ((departure.$D < 10 ? "0" : "") + departure.$D) : null
 
   // # departure and arrival day
 
@@ -136,7 +147,7 @@ const AddBus = () => {
 
   const onSubmit = (data) => {
     // data.preventDefault();
-    console.log(data);
+    // console.log(data);
     const genID = nanoid();
     let busData = {
       BusID: genID,
@@ -156,9 +167,16 @@ const AddBus = () => {
       SeatAvailable: data.seatsAvailable,
       UpperPrice: data.upperPrice,
       LowerPrice: data.lowerPrice,
+      DepDateSearch: depDateSearch,
     };
+
+    setBuslist([...buslist, busData]);
+
+    localStorage.setItem("allBuses", JSON.stringify([...buslist, busData]));
+
     console.log(busData);
     dispatch(addBus(busData));
+
     console.log("add bus state", state);
   };
   console.log(errors);
