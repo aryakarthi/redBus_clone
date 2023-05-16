@@ -7,16 +7,91 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Button,
 } from "@mui/material";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 
 import "./ShowSeats.scss";
 
 import { GiSteeringWheel } from "react-icons/gi";
 
+import availImg from "../../../assets/images/available-seat-icon.jpg";
+import unavailImg from "../../../assets/images/unavailable-seat-icon.jpg";
+
 const ShowSeats = ({ bus }) => {
   console.log(bus);
-  // console.log(data.bus);
+
+  const [selectedSeat, setSelectedSeat] = useState({});
+  const [condition, setCondition] = useState(false);
+  const [seat, setSeat] = useState([]);
+
+  const [grandtotal, setGrandtotal] = useState(0);
+
+  console.log(selectedSeat, condition, seat);
+
+  const handleChange = (e) => {
+    let { name, checked, type } = e.target;
+    console.log(name, checked, type);
+    setSelectedSeat({
+      ...selectedSeat,
+      [name]: checked,
+    });
+  };
+
+
+  useEffect(() => {
+    for (let x in selectedSeat) {
+      if (selectedSeat[x] === false) {
+        setCondition(false);
+        continue;
+      } else {
+        setCondition(true);
+        break;
+      }
+    }
+
+    const a = [];
+    let countL = 0,
+      countU = 0;
+    for (let y in selectedSeat) {
+      if (selectedSeat[y] == false) {
+        continue;
+      } else {
+        a.push(y);
+        y[0] === "L" ? (countL += 1) : (countU += 1);
+      }
+    }
+    console.log(countL, countU);
+
+    let lowerTotal = parseFloat(bus.LowerPrice) * countL;
+    let upperTotal = parseFloat(bus.UpperPrice) * countU;
+    let subTotal = lowerTotal + upperTotal;
+    console.log(lowerTotal, upperTotal, subTotal);
+    setGrandtotal(subTotal)
+
+    setSeat(a);
+
+    // const [lower, setLower] = useState(0);
+    // const [upper, setUpper] = useState(0);
+
+    // let countL = 0;
+    // let countU = 0;
+
+    // seat.filter(function (item) {
+    //   if (item.charAt(0) === "L") {
+    //     countL++;
+    //     setLower(prev=>prev+1);
+    //   } else if (item.charAt(0) === "U") {
+    //     countU++;
+    //     setUpper(prev=>prev+1);
+    //   }
+    // });
+
+    // console.log(countL, countU);
+    // console.log(lower, upper);
+  }, [selectedSeat]);
+
   return (
     <>
       <Stack className="showseats-container">
@@ -78,31 +153,71 @@ const ShowSeats = ({ bus }) => {
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L1"
+                              onChange={handleChange}
+                              name="L1"
+                              id="L1"
+                              label={
+                                <img
+                                  src={selectedSeat.L1 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L4"
+                              onChange={handleChange}
+                              name="L4"
+                              id="L4"
+                              label={
+                                <img
+                                  src={selectedSeat.L4 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L7"
+                              onChange={handleChange}
+                              name="L7"
+                              id="L7"
+                              label={
+                                <img
+                                  src={selectedSeat.L7 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L10"
+                              onChange={handleChange}
+                              name="L10"
+                              id="L10"
+                              label={
+                                <img
+                                  src={selectedSeat.L10 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L13"
+                              onChange={handleChange}
+                              name="L13"
+                              id="L13"
+                              label={
+                                <img
+                                  src={selectedSeat.L13 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
@@ -112,65 +227,146 @@ const ShowSeats = ({ bus }) => {
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L2"
+                              onChange={handleChange}
+                              name="L2"
+                              id="L2"
+                              label={
+                                <img
+                                  src={selectedSeat.L2 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L5"
+                              onChange={handleChange}
+                              name="L5"
+                              id="L5"
+                              label={
+                                <img
+                                  src={selectedSeat.L5 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L8"
+                              onChange={handleChange}
+                              name="L8"
+                              id="L8"
+                              label={
+                                <img
+                                  src={selectedSeat.L8 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L11"
+                              onChange={handleChange}
+                              name="L11"
+                              id="L11"
+                              label={
+                                <img
+                                  src={selectedSeat.L11 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L14"
+                              onChange={handleChange}
+                              name="L14"
+                              id="L14"
+                              label={
+                                <img
+                                  src={selectedSeat.L14 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
                       </Stack>
+                      <Stack className="path"></Stack>
                       <Stack>
                         <FormGroup className="low-row">
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L3"
+                              onChange={handleChange}
+                              name="L3"
+                              id="L3"
+                              label={
+                                <img
+                                  src={selectedSeat.L3 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L6"
+                              onChange={handleChange}
+                              name="L6"
+                              id="L6"
+                              label={
+                                <img
+                                  src={selectedSeat.L6 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L9"
+                              onChange={handleChange}
+                              name="L9"
+                              id="L9"
+                              label={
+                                <img
+                                  src={selectedSeat.L9 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L12"
+                              onChange={handleChange}
+                              name="L12"
+                              id="L12"
+                              label={
+                                <img
+                                  src={selectedSeat.L12 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="L15"
+                              onChange={handleChange}
+                              name="L15"
+                              id="L15"
+                              label={
+                                <img
+                                  src={selectedSeat.L15 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
@@ -188,31 +384,71 @@ const ShowSeats = ({ bus }) => {
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U1"
+                              onChange={handleChange}
+                              name="U1"
+                              id="U1"
+                              label={
+                                <img
+                                  src={selectedSeat.U1 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U4"
+                              onChange={handleChange}
+                              name="U4"
+                              id="U4"
+                              label={
+                                <img
+                                  src={selectedSeat.U4 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U7"
+                              onChange={handleChange}
+                              name="U7"
+                              id="U7"
+                              label={
+                                <img
+                                  src={selectedSeat.U7 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U10"
+                              onChange={handleChange}
+                              name="U10"
+                              id="U10"
+                              label={
+                                <img
+                                  src={selectedSeat.U10 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U13"
+                              onChange={handleChange}
+                              name="U13"
+                              id="U13"
+                              label={
+                                <img
+                                  src={selectedSeat.U13 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
@@ -222,65 +458,146 @@ const ShowSeats = ({ bus }) => {
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U2"
+                              onChange={handleChange}
+                              name="U2"
+                              id="U2"
+                              label={
+                                <img
+                                  src={selectedSeat.U2 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U5"
+                              onChange={handleChange}
+                              name="U5"
+                              id="U5"
+                              label={
+                                <img
+                                  src={selectedSeat.U5 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U8"
+                              onChange={handleChange}
+                              name="U8"
+                              id="U8"
+                              label={
+                                <img
+                                  src={selectedSeat.U8 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U11"
+                              onChange={handleChange}
+                              name="U11"
+                              id="U11"
+                              label={
+                                <img
+                                  src={selectedSeat.U11 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U14"
+                              onChange={handleChange}
+                              name="U14"
+                              id="U14"
+                              label={
+                                <img
+                                  src={selectedSeat.U14 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
                       </Stack>
+                      <Stack className="path"></Stack>
                       <Stack>
                         <FormGroup className="up-row">
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U3"
+                              onChange={handleChange}
+                              name="U3"
+                              id="U3"
+                              label={
+                                <img
+                                  src={selectedSeat.U3 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U6"
+                              onChange={handleChange}
+                              name="U6"
+                              id="U6"
+                              label={
+                                <img
+                                  src={selectedSeat.U6 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U9"
+                              onChange={handleChange}
+                              name="U9"
+                              id="U9"
+                              label={
+                                <img
+                                  src={selectedSeat.U9 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U12"
+                              onChange={handleChange}
+                              name="U12"
+                              id="U12"
+                              label={
+                                <img
+                                  src={selectedSeat.U12 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                           <Box>
                             <FormControlLabel
                               control={<Checkbox />}
-                              label="Label"
+                              title="U15"
+                              onChange={handleChange}
+                              name="U15"
+                              id="U15"
+                              label={
+                                <img
+                                  src={selectedSeat.U15 ? unavailImg : availImg}
+                                />
+                              }
                             />
                           </Box>
                         </FormGroup>
@@ -290,7 +607,41 @@ const ShowSeats = ({ bus }) => {
                 </Stack>
               </Stack>
             </Grid>
-            <Grid item md={6}></Grid>
+            <Grid item md={6}>
+              <Stack className="boarding-dropping">
+                <Stack className="bd-title" direction={"row"}>
+                  <Typography className="bd">Boarding & Dropping</Typography>
+                  <Typography className="change">CHANGE</Typography>
+                </Stack>
+                <Stack className="boarding-city-time" direction={"row"}>
+                  <Typography className="from">{bus.Travelfrom}</Typography>
+                  <Typography className="dep-time">{bus.DepTime}</Typography>
+                </Stack>
+                <Stack className="dropping-city-time" direction={"row"}>
+                  <Typography className="to">{bus.Travelto}</Typography>
+                  <Typography className="arr-time">{bus.ArrTime} <span className="arr-date">({bus.ArrDate})</span> </Typography>
+                </Stack>
+                <Stack className="seat-no-content" direction={"row"}>
+                  <Typography className="sn-title">Seat No</Typography>
+                  <Typography className="seat-nos">{seat}</Typography>
+                </Stack>
+                <Stack className="fare-title">
+                  <Typography className="fare-heading">Fare Details</Typography>
+                </Stack>
+                <Stack className="fare-content" direction={"row"}>
+                  <Stack className="fare-desc">
+                    <Typography className="amount">Amount</Typography>
+                    <Typography className="tax-note">
+                      Taxes will be calculated during payment
+                    </Typography>
+                  </Stack>
+                  <Typography className="total-amount">INR {grandtotal}</Typography>
+                </Stack>
+                <Button variant="contained" id="proceed-btn" className="proceed-btn">
+                  PROCEED TO BOOK
+                </Button>
+              </Stack>
+            </Grid>
           </Grid>
         </Container>
       </Stack>

@@ -1,6 +1,7 @@
 .showseats-container {
   background-color: #eeeded !important;
   border: 1px solid #aaa;
+  padding: 30px 0;
   .price-filter-area {
     padding: 20px 0;
     gap: 30px;
@@ -43,61 +44,156 @@
           border: 1px solid #a7a9ac;
         }
         .unavailable {
-          background-color: #CBCBCB;
-          border: 1px solid #CBCBCB;
+          background-color: #cbcbcb;
+          border: 1px solid #cbcbcb;
         }
         .female {
           background-color: #fff;
-          border: 1px solid #F1A9A0;
+          border: 1px solid #f1a9a0;
         }
         .male {
           background-color: #fff;
-          border: 1px solid #4A90E2;
+          border: 1px solid #4a90e2;
         }
       }
     }
   }
 
-  .seat-selector{
-    .lower-deck-area{
-      .lower-deck-box{
+  .seat-selector {
+    .lower-deck-area {
+      .lower-deck-box {
+        width: 80%;
         padding: 20px 10px;
         background-color: #fff;
-        .driver-cabin{
+        .driver-cabin {
           padding: 10px;
           border-right: 1px solid gray;
-          .steer-wheel{
+          .steer-wheel {
             transform: rotate(-90deg);
             font-size: 20px;
           }
         }
-        .lower-seat-selector{
+        .lower-seat-selector {
           padding: 0 20px;
-          .low-row{
+          .low-row {
+            padding: 0 30px;
             display: flex;
             flex-direction: row;
+            gap: 16px;
+            .MuiCheckbox-root {
+              display: none;
+            }
+            // .MuiFormControlLabel-root {
+            //   width: 70px;
+            //   background: url("../../../assets/images/available-seat-icon.jpg")
+            //     0 0 no-repeat;
+            //   background-size: 100%;
+            // }
+
+            // .MuiCheckbox-root.Mui-checked .MuiFormControlLabel-root {
+            //   width: 70px;
+            //   background: url("../../../assets/images/unavailable-seat-icon.jpg")
+            //     0 0 no-repeat;
+            //   background-size: 100%;
+            // }
+          }
+          .path {
+            padding: 20px 0;
           }
         }
       }
-      
     }
-    .upper-deck-area{
-      .upper-deck-box{
+    .upper-deck-area {
+      .upper-deck-box {
+        width: 80%;
         padding: 20px 10px;
         background-color: #fff;
-        .upper-space{
+        .upper-space {
           width: 40px;
         }
-        .upper-seat-selector{
+        .upper-seat-selector {
           padding: 0 20px;
-          .up-row{
+          .up-row {
+            padding: 0 30px;
             display: flex;
             flex-direction: row;
+            gap: 16px;
+            .MuiCheckbox-root {
+              display: none;
+            }
           }
-          
+          .path {
+            padding: 20px 0;
+          }
         }
       }
-      
+    }
+  }
+
+  .boarding-dropping {
+    width: 80%;
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 30px;
+    .bd-title,
+    .boarding-city-time,
+    .dropping-city-time,
+    .seat-no-content,
+    .fare-content {
+      justify-content: space-between;
+    }
+    .bd-title {
+      margin-bottom: 10px;
+      .bd {
+        font-weight: 600;
+      }
+      .change {
+        font-weight: 600;
+        color: #5279d0;
+      }
+    }
+    .boarding-city-time {
+      margin-bottom: 20px;
+      .dep-time {
+        font-weight: 600;
+      }
+    }
+    .dropping-city-time {
+      .arr-time {
+        font-weight: 600;
+        .arr-date {
+          color: #f04747;
+        }
+      }
+    }
+    .seat-no-content {
+      margin: 20px 0;
+      padding: 16px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    .fare-title {
+      margin-bottom: 20px;
+      .fare-heading {
+        font-weight: 600;
+      }
+    }
+    .fare-content {
+      .fare-desc {
+        .amount {
+          font-size: 14px;
+        }
+        .tax-note {
+          font-size: 12px;
+        }
+      }
+      .total-amount {
+        font-weight: 600;
+      }
+    }
+    .proceed-btn {
+      background-color: #e9555d;
+      margin: 20px 0;
     }
   }
 }
