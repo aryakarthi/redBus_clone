@@ -8,7 +8,10 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
+  Drawer,
 } from "@mui/material";
+
+import PassengerDetails from "../passenger_details/PassengerDetails";
 
 import React, { useState, useEffect } from "react";
 
@@ -18,17 +21,31 @@ import { GiSteeringWheel } from "react-icons/gi";
 
 import availImg from "../../../assets/images/available-seat-icon.jpg";
 import unavailImg from "../../../assets/images/unavailable-seat-icon.jpg";
+import femaleseatImg from "../../../assets/images/female-seat-icon.jpg";
+
+import { useSelector, useDispatch } from "react-redux";
 
 const ShowSeats = ({ bus }) => {
   console.log(bus);
 
+  const state = useSelector(({ data }) => data);
+  const dispatch = useDispatch();
+
+  const getGender = state?.logData?.gender;
+  console.log("getGender", getGender);
+
   const [selectedSeat, setSelectedSeat] = useState({});
   const [condition, setCondition] = useState(false);
   const [seat, setSeat] = useState([]);
+  const [selectedby, setSelectedBy] = useState([]);
 
   const [grandtotal, setGrandtotal] = useState(0);
 
-  console.log(selectedSeat, condition, seat);
+  const [drawerState, setDrawerState] = useState(false);
+
+  console.log(selectedSeat, condition, seat, selectedby);
+
+  console.log(drawerState);
 
   const handleChange = (e) => {
     let { name, checked, type } = e.target;
@@ -37,8 +54,9 @@ const ShowSeats = ({ bus }) => {
       ...selectedSeat,
       [name]: checked,
     });
-  };
 
+    setSelectedBy([...selectedby, { [name]: checked }]);
+  };
 
   useEffect(() => {
     for (let x in selectedSeat) {
@@ -68,29 +86,21 @@ const ShowSeats = ({ bus }) => {
     let upperTotal = parseFloat(bus.UpperPrice) * countU;
     let subTotal = lowerTotal + upperTotal;
     console.log(lowerTotal, upperTotal, subTotal);
-    setGrandtotal(subTotal)
+    setGrandtotal(subTotal);
 
     setSeat(a);
-
-    // const [lower, setLower] = useState(0);
-    // const [upper, setUpper] = useState(0);
-
-    // let countL = 0;
-    // let countU = 0;
-
-    // seat.filter(function (item) {
-    //   if (item.charAt(0) === "L") {
-    //     countL++;
-    //     setLower(prev=>prev+1);
-    //   } else if (item.charAt(0) === "U") {
-    //     countU++;
-    //     setUpper(prev=>prev+1);
-    //   }
-    // });
-
-    // console.log(countL, countU);
-    // console.log(lower, upper);
   }, [selectedSeat]);
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawerState({ ...drawerState, [anchor]: open });
+  };
 
   return (
     <>
@@ -159,7 +169,13 @@ const ShowSeats = ({ bus }) => {
                               id="L1"
                               label={
                                 <img
-                                  src={selectedSeat.L1 ? unavailImg : availImg}
+                                  src={
+                                    selectedSeat.L1
+                                      ? getGender === "male"
+                                        ? unavailImg
+                                        : femaleseatImg
+                                      : availImg
+                                  }
                                 />
                               }
                             />
@@ -608,38 +624,69 @@ const ShowSeats = ({ bus }) => {
               </Stack>
             </Grid>
             <Grid item md={6}>
-              <Stack className="boarding-dropping">
-                <Stack className="bd-title" direction={"row"}>
-                  <Typography className="bd">Boarding & Dropping</Typography>
-                  <Typography className="change">CHANGE</Typography>
-                </Stack>
-                <Stack className="boarding-city-time" direction={"row"}>
-                  <Typography className="from">{bus.Travelfrom}</Typography>
-                  <Typography className="dep-time">{bus.DepTime}</Typography>
-                </Stack>
-                <Stack className="dropping-city-time" direction={"row"}>
-                  <Typography className="to">{bus.Travelto}</Typography>
-                  <Typography className="arr-time">{bus.ArrTime} <span className="arr-date">({bus.ArrDate})</span> </Typography>
-                </Stack>
-                <Stack className="seat-no-content" direction={"row"}>
-                  <Typography className="sn-title">Seat No</Typography>
-                  <Typography className="seat-nos">{seat}</Typography>
-                </Stack>
-                <Stack className="fare-title">
-                  <Typography className="fare-heading">Fare Details</Typography>
-                </Stack>
-                <Stack className="fare-content" direction={"row"}>
-                  <Stack className="fare-desc">
-                    <Typography className="amount">Amount</Typography>
-                    <Typography className="tax-note">
-                      Taxes will be calculated during payment
+              {condition ? (
+                <Stack className="boarding-dropping">
+                  <Stack className="bd-title" direction={"row"}>
+                    <Typography className="bd">Boarding & Dropping</Typography>
+                    <Typography className="change">CHANGE</Typography>
+                  </Stack>
+                  <Stack className="boarding-city-time" direction={"row"}>
+                    <Typography className="from">{bus.Travelfrom}</Typography>
+                    <Typography className="dep-time">{bus.DepTime}</Typography>
+                  </Stack>
+                  <Stack className="dropping-city-time" direction={"row"}>
+                    <Typography className="to">{bus.Travelto}</Typography>
+                    <Typography className="arr-time">
+                      {bus.ArrTime}{" "}
+                      <span className="arr-date">({bus.ArrDate})</span>{" "}
                     </Typography>
                   </Stack>
-                  <Typography className="total-amount">INR {grandtotal}</Typography>
+                  <Stack className="seat-no-content" direction={"row"}>
+                    <Typography className="sn-title">Seat No</Typography>
+                    <Typography className="seat-nos">{seat}</Typography>
+                  </Stack>
+                  <Stack className="fare-title">
+                    <Typography className="fare-heading">
+                      Fare Details
+                    </Typography>
+                  </Stack>
+                  <Stack className="fare-content" direction={"row"}>
+                    <Stack className="fare-desc">
+                      <Typography className="amount">Amount</Typography>
+                      <Typography className="tax-note">
+                        Taxes will be calculated during payment
+                      </Typography>
+                    </Stack>
+                    <Typography className="total-amount">
+                      INR {grandtotal}
+                    </Typography>
+                  </Stack>
+                  <Button
+                    variant="contained"
+                    id="proceed-btn"
+                    className="proceed-btn"
+                    onClick={toggleDrawer("right", true)}
+                  >
+                    PROCEED TO BOOK
+                  </Button>
                 </Stack>
-                <Button variant="contained" id="proceed-btn" className="proceed-btn">
-                  PROCEED TO BOOK
-                </Button>
+              ) : (
+                <Stack></Stack>
+              )}
+              <Stack className="drawer-area">
+                <Drawer
+                  anchor="right"
+                  open={drawerState["right"]}
+                  onClose={toggleDrawer("right", false)}
+                >
+                  <Stack className="passenger-details" sx={{ width: "700px" }}>
+                    <PassengerDetails
+                      busID={bus.BusID}
+                      totalAmount={grandtotal}
+                      bookedSeats={seat}
+                    />
+                  </Stack>
+                </Drawer>
               </Stack>
             </Grid>
           </Grid>

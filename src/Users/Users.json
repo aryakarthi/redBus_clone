@@ -3,13 +3,15 @@
     "id": 111,
     "username": "arya",
     "password": "pwd111",
-    "role": "user"
+    "role": "user",
+    "gender": "male"
   },
   {
     "id": 113,
     "username": "sarah",
     "password": "pwd113",
-    "role": "user"
+    "role": "user",
+    "gender": "female"
   },
   {
     "id": 333,
